@@ -170,10 +170,11 @@ public abstract class EpgRunnable implements Runnable {
         // ODOT: Create EPG program by using EpgProgram.Builder
         // Required fields are: ChannelId, title, canonical genre, description,
         // long description, start time, end time, content ratings
-        final int channelId = channelIndex - 3;
+        ChannelDescriptor cd = mDtvManager.getChannelManager().getChannelByIndex(channelIndex);
+        int channelId = channelIndex - 3;
 
         EpgProgram.Builder builder = new EpgProgram.Builder();
-        mLog.i("Setting chanelid " + (channelId) + " for China");
+        mLog.i("Setting chanelid " + channelId + " for China");
         builder.setChannelId(channelId);
         mLog.i("Setting title " + event.getName() + " for China");
         builder.setTitle(event.getName());
@@ -185,7 +186,7 @@ public abstract class EpgRunnable implements Runnable {
         mLog.i("Setting ldesc " + desc + " for China");
         builder.setLongDescription(desc);
 
-        final long nowTime = 1517972400000L;
+        final long nowTime = 1518024600000L;
         final long theirTime = 1354752000000L;
         final long offset = nowTime - theirTime;
         mLog.i("Now time is " + new Date(nowTime));
